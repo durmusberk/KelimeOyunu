@@ -1,0 +1,121 @@
+import time
+import random
+
+kullanılan_kelimeler = []
+pcsonharfler = []
+pckullanılankeliemeler = []
+
+# DOSYADAKİ KELİMELERİ LİSTE YAPMA KODU
+with open('C:/users/durmus berk/desktop/java/sozluk/sozluk.txt' , encoding="utf8") as f:
+    sozluk1 = f.readlines()
+sozluk1 = [x.strip() for x in sozluk1]
+    
+#  KARAKTERLERİ DEĞİŞTİRME KODLARI
+new_strings = []
+
+for string in sozluk1:  
+    new_string = string.replace("Ä±", "ı")
+    new_strings.append(new_string)
+ 
+new_strings1 = []
+
+for string in new_strings:
+    new_string = string.replace("ÅŸ", "ş")
+    new_strings1.append(new_string)   
+
+new_strings2 = []
+
+for string in new_strings1:
+    new_string = string.replace("Ã¼", "ü")
+    new_strings2.append(new_string)   
+
+new_strings3 = []
+
+for string in new_strings2:
+    new_string = string.replace("Ã§", "ç")
+    new_strings3.append(new_string)   
+
+new_strings4 = []
+
+for string in new_strings3:
+    new_string = string.replace("Ã¶", "ö")
+    new_strings4.append(new_string)
+
+new_strings5 = []
+
+for string in new_strings4:
+    new_string = string.replace("ÄŸ", "ğ")
+    new_strings5.append(new_string)
+
+new_strings6 = []
+
+for string in new_strings5:
+    new_string = string.replace("Ã®", "î")
+    new_strings6.append(new_string)    
+
+sozluk = []
+
+for string in new_strings6:
+    new_string = string.replace("Ã¢", "â")
+    sozluk.append(new_string)
+    
+#OYUNUN BAŞLANGICI   
+print("Kelime Türetme Oyunumuza Hoşgeldiniz... Çıkış yapmak için : !çıkış "  )
+
+baslangic = random.choice(sozluk)
+sozluk.remove(baslangic)
+kullanılan_kelimeler.append(baslangic)
+cumle = "Bilgisayarın Seçimi==> {baslangic}".format(baslangic=baslangic)
+print(cumle)
+
+pcsonharfler.append(baslangic[-1])
+pcsonharf = pcsonharfler[-1]
+
+while True :
+    ilkgirdi = input("Oyuncunun Seçimi=====> ")
+            
+    girdi = ilkgirdi.lower()
+    
+    if girdi == "" :
+        print("Bu olmaz bir daha dene!")
+        continue
+    
+    oyuncusonharf = girdi[-1]
+         
+    if girdi == "!çıkış" :
+        for x in range(0,5):
+            b = "Çıkış Yapılıyor" + "." * x
+            print (b, end = "\r")
+            time.sleep(0.5)
+        quit()
+     
+    elif girdi[0] != pcsonharf :
+        print("Bilgisayarın Yazdığı Kelimenin Son Harfine Dikkat !! ")
+        continue
+    
+    elif girdi in pckullanılankeliemeler :
+        print("Çakaal bunu bilgisayar yazmıştı :D  Tekrar dene...")
+        continue
+    
+    elif girdi not in sozluk :
+        print("Böyle bir kelime icat edilmedi...")
+        continue
+            
+    elif girdi in kullanılan_kelimeler :
+        print("Bunu daha önce yazdın ama yine de sen bilirsin...")
+        continue
+                                
+    kullanılan_kelimeler.append(girdi)
+                                                             
+    while True :
+        randomkelime = random.choice(sozluk)
+        sozluk.remove(randomkelime)
+        kullanılan_kelimeler.append(randomkelime)   
+        if randomkelime[0] == oyuncusonharf :
+            break    
+    cumle = "Bilgisayarın Seçimi==> {randomkelime}".format(randomkelime=randomkelime)
+    pcsonharfler.append(randomkelime[-1])
+    print(cumle)
+    
+    pcsonharf = pcsonharfler[-1]
+    pckullanılankeliemeler.append(randomkelime)
