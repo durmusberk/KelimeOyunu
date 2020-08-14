@@ -6,7 +6,7 @@ pcsonharfler = []
 pckullanılankelimeler = []
 
 # DOSYADAKİ KELİMELERİ LİSTE YAPMA KODU
-with open('C:/users/durmus berk/desktop/java/sozluk/sozluk.txt' , encoding="utf8") as f:
+with open('sozluk.txt' , encoding="utf8") as f:
     sozluk1 = f.readlines()
 sozluk1 = [x.strip() for x in sozluk1]
     
